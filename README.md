@@ -1,6 +1,8 @@
 # BabyLock
 
-BabyLock bloquea teclado y clics mientras mirás algo con un bebé cerca. El cursor sigue moviéndose. Una pastilla flotante permite salir con doble clic.
+BabyLock bloquea el teclado, los clics, el desplazamiento y algunos gestos mientras mirás algo con un bebé cerca. El cursor sigue moviéndose. Una pastilla flotante permite salir con doble clic.
+
+La versión macOS conserva el código original de BabyLock. Windows es una adaptación del mismo comportamiento.
 
 ## Descargar
 
@@ -12,7 +14,7 @@ Descargá la última versión desde [Releases](https://github.com/alandaitch/bab
 | Windows x64 | `BabyLock-win-x64.zip` |
 | Windows ARM64 | `BabyLock-win-arm64.zip` |
 
-En macOS, descomprimí y mové `BabyLock.app` a Aplicaciones. Permití Accesibilidad cuando macOS lo pida. Como la app tiene firma ad hoc y no está notarizada, macOS puede pedirte confirmar su apertura en Ajustes del Sistema > Privacidad y seguridad.
+En macOS, descomprimí y mové `BabyLock.app` a Aplicaciones. Permití Accesibilidad cuando macOS lo pida. Como la app tiene firma ad hoc y no está notarizada, macOS puede pedirte confirmar su apertura en Ajustes del Sistema > Privacidad y seguridad. Si recompilás la app, quizá necesites desactivar y reactivar ese permiso.
 
 En Windows, descomprimí y ejecutá `BabyLock.exe`. El ejecutable incluye .NET. Windows puede mostrar una advertencia porque el archivo no tiene firma comercial.
 
@@ -27,7 +29,9 @@ Abrir BabyLock activa el bloqueo. Para salir, hacé doble clic en la pastilla fl
 
 También podés lanzar la app desde una terminal con `--minutos N` para desbloquear automáticamente. `--solo-teclado` deja libres los clics y el desplazamiento. Los argumentos se pueden combinar.
 
-BabyLock no reemplaza el bloqueo de sesión. Algunas combinaciones y pantallas protegidas del sistema pueden ignorar bloqueos de aplicaciones. Probala primero sin un bebé cerca y verificá ambos métodos de salida.
+En macOS, `--test` hace una prueba sintética del bloqueo y del atajo.
+
+BabyLock no reemplaza el bloqueo de sesión. El botón de encendido y Touch ID siguen funcionando. Algunos gestos del sistema pueden pasar por otro canal. En Windows, las pantallas protegidas pueden ignorar el bloqueo. Probala primero sin un bebé cerca y verificá ambos métodos de salida.
 
 ## Compilar
 

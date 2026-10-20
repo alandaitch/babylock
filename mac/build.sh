@@ -7,10 +7,10 @@ app="$output_dir/BabyLock.app"
 
 mkdir -p "$app/Contents/MacOS"
 cp "$repo_root/mac/Info.plist" "$app/Contents/Info.plist"
-swiftc -O -target arm64-apple-macos13.0 "$repo_root/mac/main.swift" \
+swiftc -O -swift-version 5 -target arm64-apple-macos13.0 "$repo_root/mac/main.swift" \
   -o "$app/Contents/MacOS/BabyLock-arm64" \
   -framework AppKit -framework ApplicationServices
-swiftc -O -target x86_64-apple-macos13.0 "$repo_root/mac/main.swift" \
+swiftc -O -swift-version 5 -target x86_64-apple-macos13.0 "$repo_root/mac/main.swift" \
   -o "$app/Contents/MacOS/BabyLock-x86_64" \
   -framework AppKit -framework ApplicationServices
 lipo -create "$app/Contents/MacOS/BabyLock-arm64" \
