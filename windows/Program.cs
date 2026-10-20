@@ -84,7 +84,11 @@ internal sealed class LockForm : Form
         var screen = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1280, 720);
         Location = new Point(screen.Right - Width - 20, screen.Top + 20);
         Region = new Region(RoundedRectangle(ClientRectangle, 28));
-        DoubleClick += (_, _) => Close();
+        MouseDown += (_, eventArgs) =>
+        {
+            if (eventArgs.Button == MouseButtons.Left && eventArgs.Clicks >= 2)
+                Close();
+        };
 
         if (options.Duration is TimeSpan duration)
         {
@@ -172,7 +176,8 @@ internal sealed class LockForm : Form
             return Native.CallNextHookEx(mouseHook, code, message, data);
 
         var hookData = Marshal.PtrToStructure<Native.MouseHookData>(data);
-        if (Bounds.Contains(hookData.Point.X, hookData.Point.Y)
+        var localPoint = new Point(hookData.Point.X - Left, hookData.Point.Y - Top);
+        if (Region?.IsVisible(localPoint) == true
             && message.ToInt32() is Native.WM_LBUTTONDOWN or Native.WM_LBUTTONUP
                 or Native.WM_LBUTTONDBLCLK)
         {
