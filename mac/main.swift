@@ -185,6 +185,6 @@ guard let options = Options(arguments: Array(CommandLine.arguments.dropFirst()))
 
 let application = NSApplication.shared
 application.setActivationPolicy(.accessory)
-let controller = LockController(options: options)
+private let controller = LockController(options: options)
 application.delegate = controller
 application.run()
