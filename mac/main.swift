@@ -109,8 +109,9 @@ private final class LockController: NSObject, NSApplicationDelegate {
         var eventTypes: [CGEventType] = [.keyDown, .keyUp, .flagsChanged]
         eventTypes.append(CGEventType(rawValue: 14)!)
         if !options.keyboardOnly {
-            eventTypes += [.leftMouseDown, .leftMouseUp, .rightMouseDown, .rightMouseUp,
-                           .otherMouseDown, .otherMouseUp, .scrollWheel]
+            eventTypes += [.leftMouseDown, .leftMouseUp, .leftMouseDragged,
+                           .rightMouseDown, .rightMouseUp, .rightMouseDragged,
+                           .otherMouseDown, .otherMouseUp, .otherMouseDragged, .scrollWheel]
         }
         let mask = eventTypes.reduce(CGEventMask(0)) { $0 | (CGEventMask(1) << $1.rawValue) }
         let context = Unmanaged.passUnretained(self).toOpaque()
@@ -164,7 +165,7 @@ private final class LockController: NSObject, NSApplicationDelegate {
 
         if !options.keyboardOnly,
            [.leftMouseDown, .leftMouseUp].contains(eventType),
-           let window, window.frame.contains(event.location) {
+           let window, window.frame.contains(NSEvent.mouseLocation) {
             return Unmanaged.passUnretained(event)
         }
 
